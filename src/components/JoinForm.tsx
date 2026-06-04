@@ -106,9 +106,9 @@ export function JoinForm({ room, participants, onRegistered }: JoinFormProps) {
         aria-hidden
       />
 
-      <div className="relative px-6 py-7 sm:px-8 sm:py-8">
-        <div className="mb-7 flex flex-wrap items-start justify-between gap-3">
-          <div>
+      <div className="relative px-4 py-6 sm:px-8 sm:py-8">
+        <div className="mb-6 flex flex-col gap-4 sm:mb-7 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between">
+          <div className="min-w-0 flex-1">
             <div className="mb-2 flex items-center gap-2 text-sky-400/90">
               <Sparkles className="h-4 w-4" aria-hidden />
               <span className="text-xs font-semibold uppercase tracking-[0.15em] text-zinc-500">
@@ -123,16 +123,18 @@ export function JoinForm({ room, participants, onRegistered }: JoinFormProps) {
               esta sala.
             </p>
           </div>
-          <p className="rounded-lg border border-white/8 bg-black/30 px-3 py-2 text-right text-xs tabular-nums text-zinc-500">
-            <span className="block text-[10px] uppercase tracking-wider text-zinc-600">
+          <p className="inline-flex shrink-0 items-center gap-2 self-start rounded-xl border border-white/8 bg-black/30 px-3 py-2 text-xs tabular-nums text-zinc-500 sm:flex-col sm:items-end sm:gap-0 sm:text-right">
+            <span className="text-[10px] uppercase tracking-wider text-zinc-600 sm:block">
               Ocupados
             </span>
-            <span className="text-lg font-semibold text-zinc-300">{takenCount}</span>
-            <span className="text-zinc-600"> / 100</span>
+            <span>
+              <span className="text-lg font-semibold text-zinc-300">{takenCount}</span>
+              <span className="text-zinc-600"> / 100</span>
+            </span>
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-7">
+        <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-7">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="name" className="text-zinc-300">
@@ -168,8 +170,14 @@ export function JoinForm({ room, participants, onRegistered }: JoinFormProps) {
             </div>
           </div>
 
-          <div className="space-y-3 rounded-2xl border border-white/[0.06] bg-black/20 p-4 sm:p-5">
+          <div className="space-y-3 rounded-2xl border border-white/[0.06] bg-black/20 p-3 sm:p-5">
             <Label className="text-zinc-300">Tu número (1–100)</Label>
+            {selected !== null && (
+              <p className="text-sm text-zinc-400 sm:hidden">
+                Seleccionado:{" "}
+                <span className="font-mono font-semibold text-sky-300">{selected}</span>
+              </p>
+            )}
             <NumberGrid
               slotStatus={slotStatus}
               selected={selected}

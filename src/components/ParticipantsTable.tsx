@@ -37,7 +37,7 @@ export function ParticipantsTable({ participants, loading }: ParticipantsTablePr
       <CardHeader>
         <CardTitle>Participantes en vivo</CardTitle>
         <CardDescription>
-          Actualización automática vía Supabase Realtime
+          Actualización en tiempo real
           {loading && " · sincronizando…"}
         </CardDescription>
       </CardHeader>

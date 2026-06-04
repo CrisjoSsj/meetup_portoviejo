@@ -130,20 +130,82 @@ export async function registerParticipant(input: {
   return { ok: true };
 }
 
-export async function selectFinalists(roomId: string): Promise<number> {
+/** Tamaños del embudo demo en vivo (100 → 50 → 25 → 10 → 1). */
+export const DEMO_FUNNEL = {
+  round1: 50,
+  round2: 25,
+  round3: 10,
+  winners: 1,
+} as const;
+
+function shuffleIds<T extends { id: string }>(items: T[]): string[] {
+  return [...items].sort(() => Math.random() - 0.5).map((item) => item.id);
+}
+
+/** De los finalistas, conserva al azar hasta N; el resto vuelve a registrado. */
+async function narrowFinalists(roomId: string, keepCount: number): Promise<number> {
   const supabase = getSupabase();
   if (!supabase) throw new Error("Supabase no configurado");
+
+  const { data: pool, error: fetchError } = await supabase
+    .from("participants")
+    .select("id")
+    .eq("room_id", roomId)
+    .eq("status", "finalist");
+
+  if (fetchError) throw fetchError;
+  if (!pool?.length) return 0;
+
+  const shuffled = shuffleIds(pool);
+  const kept = Math.min(keepCount, shuffled.length);
+  const demoteIds = shuffled.slice(kept);
+
+  if (demoteIds.length > 0) {
+    const { error: demoteError } = await supabase
+      .from("participants")
+      .update({ status: "registered" })
+      .in("id", demoteIds);
+
+    if (demoteError) throw demoteError;
+  }
+
+  return kept;
+}
+
+/** Ronda 1: elige al azar hasta N registrados y los pasa a finalista. */
+export async function selectRound1(roomId: string): Promise<number> {
+  const supabase = getSupabase();
+  if (!supabase) throw new Error("Supabase no configurado");
+
+  const { data: pool, error: fetchError } = await supabase
+    .from("participants")
+    .select("id")
+    .eq("room_id", roomId)
+    .eq("status", "registered");
+
+  if (fetchError) throw fetchError;
+  if (!pool?.length) return 0;
+
+  const selectedIds = shuffleIds(pool).slice(0, Math.min(DEMO_FUNNEL.round1, pool.length));
 
   const { data, error } = await supabase
     .from("participants")
     .update({ status: "finalist" })
-    .eq("room_id", roomId)
-    .gte("selected_number", 70)
-    .eq("status", "registered")
+    .in("id", selectedIds)
     .select("id");
 
   if (error) throw error;
   return data?.length ?? 0;
+}
+
+/** Ronda 2: de los finalistas, conserva al azar hasta N; el resto vuelve a registrado. */
+export async function selectRound2(roomId: string): Promise<number> {
+  return narrowFinalists(roomId, DEMO_FUNNEL.round2);
+}
+
+/** Ronda 3: estrecha otra vez el grupo de finalistas. */
+export async function selectRound3(roomId: string): Promise<number> {
+  return narrowFinalists(roomId, DEMO_FUNNEL.round3);
 }
 
 export async function selectWinners(roomId: string): Promise<number> {
@@ -159,8 +221,10 @@ export async function selectWinners(roomId: string): Promise<number> {
   if (fetchError) throw fetchError;
   if (!finalists?.length) return 0;
 
-  const shuffled = [...finalists].sort(() => Math.random() - 0.5);
-  const winnerIds = shuffled.slice(0, 3).map((f) => f.id);
+  const winnerIds = shuffleIds(finalists).slice(
+    0,
+    Math.min(DEMO_FUNNEL.winners, finalists.length),
+  );
 
   const { data, error } = await supabase
     .from("participants")

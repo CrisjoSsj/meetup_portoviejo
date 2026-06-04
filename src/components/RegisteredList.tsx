@@ -1,12 +1,14 @@
 import { useMemo } from "react";
 import { Trophy, Users, Zap } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 import { statusLabels, statusNumberClass, statusRowClass } from "@/lib/participant-status";
 import type { Participant, ParticipantStatus } from "@/lib/types";
 
 interface RegisteredListProps {
   participants: Participant[];
   loading?: boolean;
+  className?: string;
 }
 
 const statusBadgeVariant: Record<
@@ -20,7 +22,7 @@ const statusBadgeVariant: Record<
 
 const listViewportHeight = "calc((2.75rem + 0.375rem) * 10)";
 
-export function RegisteredList({ participants, loading }: RegisteredListProps) {
+export function RegisteredList({ participants, loading, className }: RegisteredListProps) {
   const ordered = useMemo(
     () => [...participants].sort((a, b) => a.selected_number - b.selected_number),
     [participants],
@@ -38,7 +40,10 @@ export function RegisteredList({ participants, loading }: RegisteredListProps) {
 
   return (
     <aside
-      className="flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-[#12121a] to-[#0a0a0c] shadow-xl shadow-black/40 xl:sticky xl:top-6"
+      className={cn(
+        "flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-[#12121a] to-[#0a0a0c] shadow-xl shadow-black/40 xl:sticky xl:top-6",
+        className,
+      )}
       aria-labelledby="registrados-titulo"
     >
       <div className="shrink-0 border-b border-white/[0.06] px-5 py-5">

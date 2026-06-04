@@ -41,8 +41,8 @@ export function JoinPage() {
       )}
 
       {state.status === "ready" && (
-        <div className="mx-auto max-w-6xl space-y-6">
-          <header className="flex flex-wrap items-end justify-between gap-4 border-b border-white/[0.06] pb-6">
+        <div className="mx-auto max-w-6xl space-y-5 sm:space-y-6">
+          <header className="flex flex-col gap-3 border-b border-white/[0.06] pb-5 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between sm:gap-4 sm:pb-6">
             <div className="space-y-3">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
@@ -73,13 +73,17 @@ export function JoinPage() {
             </p>
           )}
 
-          <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(240px,280px)] xl:items-start">
+          <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(240px,280px)] xl:items-start xl:gap-6">
             <JoinForm
               room={state.room}
               participants={participants}
               onRegistered={() => void reload()}
             />
-            <RegisteredList participants={participants} loading={participantsLoading} />
+            <RegisteredList
+              participants={participants}
+              loading={participantsLoading}
+              className="max-xl:order-last"
+            />
           </div>
         </div>
       )}

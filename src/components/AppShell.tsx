@@ -33,7 +33,7 @@ export function AppShell({ children, badge }: AppShellProps) {
         </div>
       </header>
 
-      <main className="relative z-10 mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
+      <main className="relative z-10 mx-auto max-w-6xl px-3 py-6 sm:px-6 sm:py-10">
         {children}
       </main>
 
@@ -41,7 +41,7 @@ export function AppShell({ children, badge }: AppShellProps) {
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 text-center text-xs text-zinc-500 sm:flex-row sm:px-6 sm:text-left">
           <p className="text-zinc-600">Portoviejo · 2026</p>
           <ClubCommunityLink variant="footer" />
-          <p className="text-zinc-600">MCP · Supabase · Realtime</p>
+          <p className="text-zinc-600">Cursor · MCP · Meetup</p>
         </div>
       </footer>
     </div>

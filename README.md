@@ -70,20 +70,24 @@ En `/admin/:roomSlug`:
 
 | Botón | Efecto |
 |-------|--------|
-| **Seleccionar finalistas** | `status = finalist` donde `selected_number >= 70` |
-| **Seleccionar ganadores** | 3 finalistas aleatorios → `status = winner` |
+| **Ronda 1: 50 al azar** | Elige 50 registrados al azar → `status = finalist` |
+| **Ronda 2: 25 al azar** | De los finalistas, conserva 25 al azar; el resto vuelve a `registered` |
+| **Ronda 3: 10 al azar** | De los finalistas, conserva 10 al azar; el resto vuelve a `registered` |
+| **Ronda 4: 1 ganador** | 1 finalista al azar → `status = winner` |
 | **Reiniciar sala** | Marca sala actual `is_active = false`, crea **nueva** room vacía (mismo nombre, slug nuevo) |
 
 ## 4. Prompts MCP sugeridos (meetup)
 
 Con Supabase MCP conectado al mismo proyecto:
 
-1. *«Muéstrame todos los participantes con número mayor a 70 en la sala `demo`.»*
-2. *«Convierte esos participantes en finalistas (`status = finalist`).»*
-3. *«Selecciona 3 ganadores aleatorios entre finalistas.»*
-4. *«Muéstrame estadísticas de la sala `demo`: total registrados, finalistas y ganadores.»*
-5. *«¿Qué número fue el más popular en la sala activa?»*
-6. *«¿Cuántas personas se registraron en los últimos 5 minutos?»*
+1. *«Muéstrame cuántos participantes hay registrados en la sala `demo`.»*
+2. *«Elige 50 registrados al azar y conviértelos en finalistas.»*
+3. *«De los finalistas, conserva 25 al azar y devuelve el resto a registrado.»*
+4. *«De los finalistas, conserva 10 al azar.»*
+5. *«Elige 1 ganador al azar entre los finalistas.»*
+6. *«Muéstrame estadísticas de la sala `demo`: total registrados, finalistas y ganadores.»*
+7. *«¿Qué número fue el más popular en la sala activa?»*
+8. *«¿Cuántas personas se registraron en los últimos 5 minutos?»*
 
 Ejemplo SQL útil:
 

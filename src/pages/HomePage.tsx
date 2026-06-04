@@ -42,8 +42,8 @@ export function HomePage() {
           Elige tu número y entra al sorteo
         </h1>
         <p className="mt-4 max-w-xl text-lg leading-relaxed text-zinc-400">
-          Registro en tiempo real con Supabase. Durante la sesión veremos flujos con{" "}
-          <span className="text-zinc-200">Cursor MCP</span> en vivo.
+          Demo en vivo del meetup de Cursor: registro al instante y flujos con{" "}
+          <span className="text-zinc-200">MCP</span> desde el editor.
         </p>
         <div className="mt-6">
           <ClubCommunityLink variant="cta" />

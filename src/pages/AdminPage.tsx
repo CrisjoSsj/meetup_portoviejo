@@ -80,6 +80,7 @@ export function AdminPage() {
           <AdminStats stats={stats} />
           <DemoControls
             room={state.room}
+            stats={stats}
             onRoomChange={setRoom}
             onActionComplete={() => void reload()}
           />
