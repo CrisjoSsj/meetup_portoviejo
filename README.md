@@ -75,7 +75,7 @@ En `/admin/:roomSlug`:
 | **Ronda 1: 50 al azar** | Elige 50 registrados al azar → `status = finalist` |
 | **Ronda 2: 25 al azar** | De los finalistas, conserva 25 al azar; el resto vuelve a `registered` |
 | **Ronda 3: 10 al azar** | De los finalistas, conserva 10 al azar; el resto vuelve a `registered` |
-| **Ronda 4: 1 ganador** | 1 finalista al azar → `status = winner` |
+| **Ronda 4: 3 ganadores** | 3 finalistas al azar → `status = winner` |
 | **Reiniciar sala** | Marca sala actual `is_active = false`, crea **nueva** room vacía (mismo nombre, slug nuevo) |
 
 ## 4. Prompts MCP sugeridos (meetup)
@@ -86,7 +86,7 @@ Con Supabase MCP conectado al mismo proyecto:
 2. *«Elige 50 registrados al azar y conviértelos en finalistas.»*
 3. *«De los finalistas, conserva 25 al azar y devuelve el resto a registrado.»*
 4. *«De los finalistas, conserva 10 al azar.»*
-5. *«Elige 1 ganador al azar entre los finalistas.»*
+5. *«Elige 3 ganadores al azar entre los finalistas.»*
 6. *«Muéstrame estadísticas de la sala `demo`: total registrados, finalistas y ganadores.»*
 7. *«¿Qué número fue el más popular en la sala activa?»*
 8. *«¿Cuántas personas se registraron en los últimos 5 minutos?»*

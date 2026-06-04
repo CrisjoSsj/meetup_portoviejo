@@ -130,12 +130,12 @@ export async function registerParticipant(input: {
   return { ok: true };
 }
 
-/** Tamaños del embudo demo en vivo (100 → 50 → 25 → 10 → 1). */
+/** Tamaños del embudo demo en vivo (100 → 50 → 25 → 10 → 3). */
 export const DEMO_FUNNEL = {
   round1: 50,
   round2: 25,
   round3: 10,
-  winners: 1,
+  winners: 3,
 } as const;
 
 function shuffleIds<T extends { id: string }>(items: T[]): string[] {

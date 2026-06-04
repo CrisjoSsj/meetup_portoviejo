@@ -61,7 +61,7 @@ export function DemoControls({ room, stats, onRoomChange, onActionComplete }: De
         </CardTitle>
         <CardDescription>
           Embudo al azar: registrados → {DEMO_FUNNEL.round1} → {DEMO_FUNNEL.round2} →{" "}
-          {DEMO_FUNNEL.round3} → {DEMO_FUNNEL.winners} ganador. Ideal para explicar Cursor MCP en
+          {DEMO_FUNNEL.round3} → {DEMO_FUNNEL.winners} ganadores. Ideal para explicar Cursor MCP en
           vivo.
         </CardDescription>
       </CardHeader>
@@ -165,7 +165,7 @@ export function DemoControls({ room, stats, onRoomChange, onActionComplete }: De
               Ronda 4
             </p>
             <p className="text-sm text-zinc-300">
-              <span className="font-semibold text-white">{DEMO_FUNNEL.winners}</span> ganador al azar
+              <span className="font-semibold text-white">{DEMO_FUNNEL.winners}</span> ganadores al azar
               entre finalistas
             </p>
             <Button
@@ -179,7 +179,7 @@ export function DemoControls({ room, stats, onRoomChange, onActionComplete }: De
               ) : (
                 <Trophy className="h-4 w-4" aria-hidden />
               )}
-              1 ganador
+              {DEMO_FUNNEL.winners} ganadores
             </Button>
           </div>
         </div>
