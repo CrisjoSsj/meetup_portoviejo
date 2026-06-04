@@ -1,5 +1,6 @@
 import { ClubCommunityLink } from "@/components/ClubCommunityLink";
 import { EventBrand } from "@/components/EventBrand";
+import { GitHubRepoLink } from "@/components/GitHubRepoLink";
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -9,6 +10,7 @@ interface AppShellProps {
 export function AppShell({ children, badge }: AppShellProps) {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-zinc-100">
+      <GitHubRepoLink />
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
         <div className="absolute -left-40 top-0 h-[28rem] w-[28rem] rounded-full bg-white/[0.03] blur-3xl" />
         <div className="absolute -right-32 top-1/3 h-80 w-80 rounded-full bg-indigo-600/10 blur-3xl" />

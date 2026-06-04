@@ -1,5 +1,7 @@
 # Meetup Portoviejo — Rooms, Realtime y MCP
 
+Repositorio: [github.com/CrisjoSsj/meetup_portoviejo](https://github.com/CrisjoSsj/meetup_portoviejo)
+
 App para demostrar **Cursor**, **Supabase MCP** y **Vercel** en una meetup. Cada sesión usa una **Room** (`slug`); los datos históricos **nunca se borran** — al reiniciar solo se crea una sala nueva.
 
 ## Stack
