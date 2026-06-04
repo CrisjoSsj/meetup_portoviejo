@@ -1,0 +1,9 @@
+node_modules
+.npm-cache
+.cursor
+dist
+.env
+.env.local
+.vercel
+*.tsbuildinfo
+.DS_Store
